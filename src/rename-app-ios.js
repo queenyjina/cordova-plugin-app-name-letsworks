@@ -7,7 +7,7 @@ var xml2js = require('xml2js');
 var parser = new xml2js.Parser();
 
 const plist = require("simple-plist");
-const CFBundleDisplayName = getConfigParser(context, configPath).getPreference('AppName');
+
 
 module.exports = function(context) {
 
@@ -26,7 +26,8 @@ module.exports = function(context) {
     // read ios [APP_NAME]-Info.plist
     const infoPlistPath = path.join(context.opts.projectRoot, 'platforms', 'ios', appName, appName + '-Info.plist');
     let infoPlist = plist.readFileSync(infoPlistPath);
-    infoPlist.CFBundleDisplayName = CFBundleDisplayName;
+
+    infoPlist.CFBundleDisplayName = infoPlist.CFBundleName;
 
     // write data back to [APP_NAME]-Info.plist
     plist.writeFileSync(infoPlistPath, infoPlist);
