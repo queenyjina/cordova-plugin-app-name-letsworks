@@ -7,8 +7,7 @@ var xml2js = require('xml2js');
 var parser = new xml2js.Parser();
 
 const plist = require("simple-plist");
-
-const CFBundleDisplayName = 'YOUR APP LABEL';
+const CFBundleDisplayName = getConfigParser(context, configPath).getPreference('AppName');
 
 module.exports = function(context) {
 
